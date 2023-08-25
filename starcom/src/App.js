@@ -14,7 +14,7 @@ function World () {
 
   useEffect(() => {
     // load data
-    fetch('./ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
+    fetch("./data/ne_110m_admin_0_countries.geojson").then(res => res.json()).then(setCountries);
   }, []);
 
   return <Globe
@@ -25,29 +25,10 @@ function World () {
     hexPolygonsData={countries.features}
       hexPolygonResolution={3}
       hexPolygonMargin={0.3}
-
-      // Old Color
-      //hexPolygonColor={() => `#${Math.round(Math.random() * Math.pow(2, 24)).toString(16).padStart(6, '0')}`}
-
-      // Hex Polygon - Color
-      hexPolygonColor={() => {
-        const colors = ['#0074D9', '#39CCCC', '#2ECC40']; // Blue, Teal, Cyan
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        return randomColor;
-      }}
-
-      // Old Label
-      // hexPolygonLabel={({ properties: d }) => `
-      //   <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-      //   Population: <i>${d.POP_EST}</i>
-      // `}
-
-      // Hex Polygon - Label
-      hexPolygonLabel={({ properties: d, center }) => `
+      hexPolygonColor={() => `#${Math.round(Math.random() * Math.pow(2, 24)).toString(16).padStart(6, '0')}`}
+      hexPolygonLabel={({ properties: d }) => `
         <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-        Population: <i>${d.POP_EST}</i> <br />
-        Latitude: <i>${center[1]}</i> <br />
-        Longitude: <i>${center[0]}</i>
+        Population: <i>${d.POP_EST}</i>
       `}
   />;
 };
