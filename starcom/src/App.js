@@ -44,11 +44,11 @@ function World () {
 
       // Hex Polygon - Label
       hexPolygonLabel={({ properties: d, center }) => `
-      <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-      Population: <i>${d.POP_EST}</i> <br />
-      Latitude: <i>${center[1]}</i> <br />
-      Longitude: <i>${center[0]}</i>
-    `}
+        <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
+        Population: <i>${d.POP_EST}</i> <br />
+        Latitude: <i>${center[1]}</i> <br />
+        Longitude: <i>${center[0]}</i>
+      `}
   />;
 };
 
