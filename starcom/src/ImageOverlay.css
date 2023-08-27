@@ -117,8 +117,13 @@
   }
 
   .button-stack {
+    position: fixed;
+    top: 50%; /* Center vertically */
+    right: 0;
+    transform: translateY(-50%); /* Adjust for vertical centering */
     display: flex;
     flex-direction: column; /* Arrange buttons vertically */
+    align-items: flex-start; /* Align buttons to the left side */
   }
 
   .button-stack button {
