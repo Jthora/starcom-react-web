@@ -139,9 +139,9 @@ function App() {
           <button className="login-button">Login</button>
         </div>
         <div className="button-stack">
-          <button>About</button>
-          <button>Facebook</button>
-          <button>Contact</button>
+          <a href="https://about.starcom.app"><button>About</button></a>
+          <a href="https://discord.gg/FB2yDA5Mzs"><button>Discord</button></a>
+          <a href="https://github.com/Jthora/starcom-react-web"><button>Github</button></a>
         </div>
       </div>
       <UIFacadeBottomLeft />
