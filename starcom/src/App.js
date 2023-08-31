@@ -132,7 +132,7 @@ function App() {
   return (
     <div className="App">
       <div className="top-middle-text">
-        Starcom App: Global Interface
+        Starcom App: Global OSINT Operations Command Control Interface
       </div>
       <div className="button-container">
         <div className="login-container">
