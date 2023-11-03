@@ -7,6 +7,9 @@ import Globe from 'react-globe.gl';
 import React, { useEffect, useState, useRef } from 'react';
 import * as d3 from 'd3'; // Import d3 library
 
+// Components
+import AboutPopup from './components/AboutPopup'; // Updated import path
+
 // Images
 //import globeImageUrl from './assets/earthmap1k.jpeg';
 import uiFacadeBottomLeft from './images/Starcom-UI_ConceptArt-bottomLeft.png';
@@ -129,6 +132,16 @@ function World() {
 }
 
 function App() {
+  const [showAbout, setShowAbout] = useState(false);
+
+  const handleShowAbout = () => {
+    setShowAbout(true);
+  }
+
+  const handleCloseAbout = () => {
+    setShowAbout(false);
+  }
+
   return (
     <div className="App">
       <div className="top-middle-text">
@@ -139,7 +152,7 @@ function App() {
           <button className="login-button">Login</button>
         </div>
         <div className="button-stack">
-          <a href="https://about.starcom.app"><button>About</button></a>
+          <button onClick={handleShowAbout}>About</button>
           <a href="https://discord.gg/FB2yDA5Mzs"><button>Discord</button></a>
           <a href="https://github.com/Jthora/starcom-react-web"><button>Github</button></a>
         </div>
@@ -149,6 +162,8 @@ function App() {
       <UIFacadeBottomRight />
       <UIFacadeSideLeft />
       <World />
+
+      {showAbout && <AboutPopup />}
     </div>
   );
 }
