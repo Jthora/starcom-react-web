@@ -77,6 +77,19 @@ function UIFacadeSideLeft() {
 function World() {
   const [countries, setCountries] = useState({ features: [] });
   const [popData, setPopData] = useState([]);
+  
+  const updateGlobeDimensions = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+  
+    // Update the dimensions of the globe using the useRef
+    globeRef.current.width = width;
+    globeRef.current.height = height;
+  
+    // You may also need to call any necessary update methods on the globe
+    // For example, if the globe uses d3 to update its projection, call that here.
+    globeRef.current.updateProjection();
+  };  
 
   const globeRef = useRef(null);
   const weightColor = d3.scaleSequentialSqrt(d3.interpolateRdYlBu)
@@ -97,6 +110,15 @@ function World() {
       .then(res => res.text())
       .then(csv => d3.csvParse(csv, ({ lat, lng, pop }) => ({ lat: +lat, lng: +lng, pop: +pop })))
       .then(setPopData);
+
+    // Event listener for window resize
+    window.addEventListener('resize', updateGlobeDimensions);
+
+    // deinit
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener('resize', updateGlobeDimensions);
+    };
   }, []);
 
   return (
