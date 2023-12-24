@@ -9,6 +9,7 @@ import * as d3 from 'd3'; // Import d3 library
 
 // Components
 import AboutPopup from './components/AboutPopup'; // Updated import path
+import RSSFeedWindow from './components/RSSFeedWindow'; // Import the RSSFeedWindow component
 
 // Images
 //import globeImageUrl from './assets/earthmap1k.jpeg';
@@ -155,26 +156,49 @@ function World() {
 
 function App() {
   const [showAbout, setShowAbout] = useState(false);
+  const [showRSSFeed, setShowRSSFeed] = useState(false);
+  const [rssFeedData, setRSSFeedData] = useState([]); // State to hold RSS feed data
 
   const handleShowAbout = () => {
-    setShowAbout(true);
-  }
+    setShowAbout(prevShowAbout => !prevShowAbout);
+  };
 
-  const handleCloseAbout = () => {
-    setShowAbout(false);
-  }
+  const handleCloseRSSFeed = () => {
+    setShowRSSFeed(false);
+  };
+
+  // Function to fetch and set RSS feed data
+  const fetchRSSFeedData = async () => {
+    try {
+      const response = await fetch('https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml');
+      const data = await response.json(); // Parse the RSS data here
+
+      // Set the parsed RSS data to the state
+      setRSSFeedData(data.items);
+      setShowRSSFeed(true); // Show the RSS feed window
+    } catch (error) {
+      console.error('Error fetching RSS feed:', error);
+    }
+  };
 
   return (
     <div className="App">
       <div className="top-middle-text">
         Starcom App: Global OSINT Operations Command Control Interface
       </div>
+
+      {/* Render RSS feed window if showRSSFeed is true */}
+      {showRSSFeed && (
+        <RSSFeedWindow rssFeedData={rssFeedData} onClose={handleCloseRSSFeed} />
+      )}
+
       <div className="button-container">
         <div className="login-container">
           <button className="login-button">Login</button>
         </div>
         <div className="button-stack">
           <button onClick={handleShowAbout}>About</button>
+          <button onClick={fetchRSSFeedData}>Show RSS Feed</button>
           <a href="https://discord.gg/FB2yDA5Mzs"><button>Discord</button></a>
           <a href="https://github.com/Jthora/starcom-react-web"><button>Github</button></a>
         </div>
@@ -185,7 +209,7 @@ function App() {
       <UIFacadeSideLeft />
       <World />
 
-      {showAbout && <AboutPopup />}
+      {showAbout && <AboutPopup onClose={handleShowAbout} />}
     </div>
   );
 }

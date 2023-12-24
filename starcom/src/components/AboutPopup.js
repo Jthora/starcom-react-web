@@ -20,7 +20,9 @@ function AboutPopup({ onClose }) {
         </ul>
         <p>Explore the endless possibilities of Starcom App and enhance your OSINT capabilities today. Join our community of intelligence professionals and stay connected with us via Discord 🎮 and GitHub 🐙 to receive updates, share feedback, and collaborate on improvements.</p>
         <p>Thank you for choosing Starcom App for your OSINT needs! 🙌</p>
-        <button onClick={onClose}>Close</button>
+        <div className="about-button">
+          <button onClick={onClose}>Close</button>
+        </div>
       </div>
     </div>
   );

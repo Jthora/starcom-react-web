@@ -80,7 +80,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    z-index: 9999;
+    z-index: 100;
     mix-blend-mode: lighten;
   }
 
@@ -96,7 +96,7 @@
     display: flex;
     gap: 10px; /* Add some spacing between buttons */
     padding: 10px; /* Add padding to create space around buttons */
-    z-index: 9999;
+    z-index: 100;
   }
 
   .login-button {
